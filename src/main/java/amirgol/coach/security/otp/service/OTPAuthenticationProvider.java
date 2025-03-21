@@ -3,7 +3,7 @@ package amirgol.coach.security.otp.service;
 import amirgol.coach.common.exception.CoachException;
 import amirgol.coach.common.exception.Exceptions;
 import amirgol.coach.participants.model.Participants;
-import amirgol.coach.participants.repository.ParticipantRepository;
+import amirgol.coach.participants.repository.ParticipantDAO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class OTPAuthenticationProvider implements AuthenticationProvider {
 
     private final OTPService otpService;
-    private final ParticipantRepository participantRepository;
+    private final ParticipantDAO participantDAO;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -36,7 +36,7 @@ public class OTPAuthenticationProvider implements AuthenticationProvider {
 
         // Find participants by email
 
-        Optional<Participants> participantOpt = participantRepository.findByEmail(participantEmail);
+        Optional<Participants> participantOpt = participantDAO.findByEmail(participantEmail);
         if (participantOpt.isEmpty()) {
             log.error("Participant with email {} not found", participantEmail);
             throw new CoachException(Exceptions.PARTICIPANT_NOT_FOUND);
@@ -47,7 +47,7 @@ public class OTPAuthenticationProvider implements AuthenticationProvider {
         participant.markEmailAsVerified();
         participant.resetFailedLoginAttempts();
         participant.updateLastLogin();
-        participantRepository.save(participant);
+        participantDAO.save(participant);
 
         // Return authenticated token with authorities
         return new UsernamePasswordAuthenticationToken(
