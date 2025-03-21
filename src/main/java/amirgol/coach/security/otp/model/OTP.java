@@ -1,6 +1,7 @@
 package amirgol.coach.security.otp.model;
 
 
+import amirgol.coach.participants.model.Participants;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
