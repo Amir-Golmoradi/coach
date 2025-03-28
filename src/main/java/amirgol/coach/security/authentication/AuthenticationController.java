@@ -21,7 +21,7 @@ public class AuthenticationController {
 
     @PostMapping("/generate")
     public ResponseEntity<String> generateOtp(@Valid @RequestBody OTPGenerateRequest request) {
-        String otp = authService.generateOtp(request.getEmail());
+        var otp = authService.generateOtp(request.getEmail());
 
         // In production, send OTP via email
         emailService.sendOtpEmail(request.getEmail(), otp);
