@@ -8,10 +8,11 @@ package amirgol.coach.participants.dto;
  *
  * @param email    the email address of the participant. This is the primary
  *                 identifier of a participant.
- * @param userName the user name of the participant.
+ * @param username the user name of the participant.
  */
 public record ParticipantDTO(
+        Long id,
         String email,
-        String userName
+        String username
 ) {
 }
