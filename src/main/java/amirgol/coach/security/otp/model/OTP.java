@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class OTP {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "otp_seq")
     @SequenceGenerator(name = "otp_seq_gen", sequenceName = "otp_seq", allocationSize = 1)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
