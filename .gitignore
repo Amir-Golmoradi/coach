@@ -13,7 +13,8 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
+src/main/resources/application.yml
+src/main/resources/db/migration/
 ### IntelliJ IDEA ###
 .idea
 *.iws
