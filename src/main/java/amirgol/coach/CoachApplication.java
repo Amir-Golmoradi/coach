@@ -13,3 +13,4 @@ public class CoachApplication {
         SpringApplication.run(CoachApplication.class, args);
     }
 }
+
