@@ -68,15 +68,11 @@ public class Participants implements UserDetails {
     @Column(name = "deleted_at")
     private Date deletedAt;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "participants",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id")
-    )
+    @ElementCollection(targetClass = Role.class)
+    @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "participant", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "participants", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<OTP> otps;
 
     public void updateUsername(String updatedName) {
