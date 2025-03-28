@@ -1,43 +1,27 @@
 services:
-  redis:
-    image: redis:latest
-    container_name: coach-redis
-    ports:
-      - "${REDIS_PORT}:6379"
-    volumes:
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
-    command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
-    env_file:
-      - ../Coach/.env
-
-  rabbitmq:
-    image: rabbitmq:management
-    container_name: rabbitmq
-    ports:
-      - "${RABBITMQ_PORT}:5672"
-      - "15672:15672" # RabbitMQ Admin Panel
-    env_file:
-      - ../Coach/.env
-
   db:
-    image: postgres:latest
-    container_name: postgres-db
-    restart: always
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "${PG_PORT}:5432"
-    volumes:
-      - pg_data:/var/lib/postgresql/data
+      - "${MYSQL_PORT}:3306"
     env_file:
-      - ../Coach/.env
+      - ../coach/.env
+    volumes:
+      - mysql_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "${PG_USER}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 3
 
   springbootapp:
     build:
-      context: ../Coach
+      context: ../coach
       dockerfile: Dockerfile
     ports:
       - "${SPRING_PORT}:8080"
@@ -45,7 +29,7 @@ services:
       db:
         condition: service_healthy
     env_file:
-      - ../Coach/.env
+      - ../coach/.env
 
 volumes:
-  pg_data:
+  mysql_data:

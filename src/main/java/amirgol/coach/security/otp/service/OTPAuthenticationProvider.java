@@ -13,7 +13,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -27,15 +26,14 @@ public class OTPAuthenticationProvider implements AuthenticationProvider {
         String participantEmail = authentication.getName();
         String otpPassword = authentication.getCredentials().toString();
 
-        // Validate OTPs
-        boolean isOtpValid = otpService.validateOtp(otpPassword, participantEmail);
+        // Validate OTPs using the correct parameter order
+        boolean isOtpValid = otpService.validateOtp(participantEmail, otpPassword);
         if (!isOtpValid) {
             log.error("OTP validation failed for user {}", participantEmail);
             throw new CoachException(Exceptions.OTP_INVALID);
         }
 
-        // Find participants by email
-
+        // Find participant by email
         Optional<Participants> participantOpt = participantDAO.findByEmail(participantEmail);
         if (participantOpt.isEmpty()) {
             log.error("Participant with email {} not found", participantEmail);
@@ -55,7 +53,6 @@ public class OTPAuthenticationProvider implements AuthenticationProvider {
                 null,
                 participant.getAuthorities()
         );
-
     }
 
     @Override
