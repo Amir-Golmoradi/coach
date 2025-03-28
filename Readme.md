@@ -6,7 +6,7 @@
 </div>
 <br>
 
-![Static Badge](https://img.shields.io/badge/MIT-License-brightgreen) [![Contributions Highly Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Amir-Golmoradi/Coach/blob/master/CONTRIBUTING.md) ![GitHub Repo stars](https://img.shields.io/github/stars/Amir-Golmoradi/Coach) ![GitHub forks](https://img.shields.io/github/forks/Amir-Golmoradi/Coach?label=Amir%20Golmoradi) ![Java](https://img.shields.io/badge/Java-21-blue?logo=openjdk)
+![Static Badge](https://img.shields.io/badge/MIT-License-brightgreen) [![Contributions Highly Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Amir-Golmoradi/coach/blob/master/CONTRIBUTING.md) ![GitHub Repo stars](https://img.shields.io/github/stars/Amir-Golmoradi/coach) ![GitHub forks](https://img.shields.io/github/forks/Amir-Golmoradi/coach?label=Amir%20Golmoradi) ![Java](https://img.shields.io/badge/Java-21-blue?logo=openjdk)
 
 ## 📜 Description
 
